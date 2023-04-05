@@ -3,11 +3,13 @@ import App from './App.vue'
 import router from './router'
 import './assets/styles/styles.scss'
 
-// Vuetify Plugin
+//  Plugins
 import vuetify from "./plugins/vuetify"
+import store from './store/index'
 
 const app = createApp(App)
 
-app.use(router).use(vuetify)
+
+app.use(router).use(vuetify).use(store)
 
 app.mount('#app')

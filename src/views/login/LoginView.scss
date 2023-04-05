@@ -1,0 +1,49 @@
+@use '@/assets/styles/ui.scss';
+
+.logo-area {
+    color: ui.$colors-ui-white;
+}
+
+.login-page-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-box {
+    max-width: 60vw;
+    min-height: 06vh;
+    border: 1px ui.$colors-border solid;
+    border-radius: ui.$border-radius-medium;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: ui.$colors-ui-black;
+    box-shadow: 4px 8px #888888;
+    ;
+    row-gap: ui.$spacing-medium-large;
+
+    & div,
+    p {
+        color: ui.$colors-ui-white;
+    }
+
+    padding: ui.$spacing-medium-large;
+
+}
+
+.input-container {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: ui.$spacing-small;
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    column-gap: ui.$spacing-extra-small;
+}
