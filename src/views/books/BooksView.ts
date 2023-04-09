@@ -21,6 +21,7 @@ export default {
 
 
             //Form Data Holders
+            dueDate: '',
             checkedOutBook: null,
             editBook: {},
             selectedDeleteBook: null,
@@ -47,10 +48,6 @@ export default {
             bookIsUpdating: false,
             bookIsDeleting: false,
             bookIsCreating: false,
-
-            //Due Date
-            dueDate: '',
-
 
 
         }
