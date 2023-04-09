@@ -48,6 +48,8 @@ export default {
             bookIsDeleting: false,
             bookIsCreating: false,
 
+            //Due Date
+            dueDate: '',
 
 
 
@@ -58,6 +60,7 @@ export default {
     },
     methods: {
         checkoutBook() {
+            this.checkedOutBook.due_date = this.dueDate;
             this.$store.dispatch("books/checkoutBook", this.checkedOutBook)
                 .finally(() => {
                     this.checkedOutBook = null;

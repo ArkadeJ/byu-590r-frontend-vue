@@ -68,9 +68,12 @@
             <v-card-text>
                 Are you sure you wish to check out this book?
             </v-card-text>
+            <v-card-text>
+                <input type="date" v-model="dueDate" />
+            </v-card-text>
             <v-card-actions>
                 <v-btn color="red" @click="checkedOutBook = null">No</v-btn>
-                <v-btn color="green" @click="checkoutBook()">Yes</v-btn>
+                <v-btn color="green" @click="checkoutBook()" :disabled="!dueDate">Yes</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>

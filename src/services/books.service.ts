@@ -18,7 +18,10 @@ class BooksService {
     }
 
     checkoutBook(book) {
-        return axios.patch(API_URL + 'books/' + book.id + '/checkout', {}, { headers: authHeader() })
+
+        let formData = new FormData();
+        formData.append('due_date', book.due_date);
+        return axios.post(API_URL + 'books/' + book.id + '/checkout', formData, { headers: authHeader() })
             .then(response => {
                 return response.data.results;
             })
