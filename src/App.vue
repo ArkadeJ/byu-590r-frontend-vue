@@ -141,7 +141,7 @@ export default {
     <v-app-bar :title="(authUser.name === undefined) ? '' : title" v-if="isAuthenticated">
       <v-spacer></v-spacer>
       <v-btn to="/" default>Home</v-btn>
-      <v-btn to="about">About</v-btn>
+      <v-btn to="about">Fish</v-btn>
       <v-btn to="books">Books</v-btn>
       <v-btn @click="logout();">Logout</v-btn>
       <v-btn @click="avatarDialog = true">

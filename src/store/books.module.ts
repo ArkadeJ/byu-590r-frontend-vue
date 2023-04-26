@@ -5,13 +5,13 @@ const initialState = { booksList: [] };
 export const books = {
     namespaced: true,
     state: initialState,
-    actions: {
+    actions: { 
         getBooks({ commit }) {
             return booksService.getBooks().then(
                 books => {
                     commit('setBooks', books);
                     return Promise.resolve(books);
-                }
+                } 
             );
         },
         returnBook({ commit, getters }, book) {
@@ -30,7 +30,7 @@ export const books = {
                     commit('setBookCheckedQty', response.book);
                     return Promise.resolve(response.book);
                 }
-            );
+            ); 
         },
         createBook({ commit }, book) {
             return booksService.createBook(book).then(

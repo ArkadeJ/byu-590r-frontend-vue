@@ -75,7 +75,7 @@
                 <v-btn color="red" @click="checkedOutBook = null">No</v-btn>
                 <v-btn color="green" @click="checkoutBook()" :disabled="!dueDate">Yes</v-btn>
             </v-card-actions>
-        </v-card>
+        </v-card> 
     </v-dialog>
 
     <v-dialog v-model="deleteBookDialog" width="auto">
@@ -183,4 +183,3 @@
 </template>
 
 <script src="./BooksView.ts"></script>
-<style src="./BooksView.scss"></style> 
