@@ -1,6 +1,11 @@
 <template>
   <h1>This page is for logging the fish they catch of each species along with what rod and fly they used to catch them.</h1>
   <br><br>
+
+  <h4>-Notes: <br>When editing the flies, you must clear the field values before changing them.<br>
+             Must reload the page after creating a new entity before it appears.</h4>
+  <br><br>
+
   <v-row>
         <v-col cols="12">
             <v-btn block color="green" @click="openCreateDialog" prepend-icon="mdi-plus">Create</v-btn>
