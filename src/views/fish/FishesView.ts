@@ -25,6 +25,8 @@ export default {
     data: function () {
         return {
 
+            //email
+            email: '',
 
             //Form Data Holders
             selectedDeleteFish: null,
@@ -36,16 +38,17 @@ export default {
                 flies: [],
             },
 
-            //Messages
+            //Messages 
             editFishErrorMessage: null,
             newFishErrorMessage: null,
-            editFlyErrorMessage: null,
+            emailErrorMessage: null,
 
             //Dialogs
             createFishDialog: false,
             deleteFishDialog: false,
             editFishDialog: false,
-            editFlyDialog: false,
+            emailDialog: false,
+
 
             //Toggle Buttons
             editFileChangeDialogBtn: false,
@@ -54,8 +57,7 @@ export default {
             fishIsUpdating: false,
             fishIsDeleting: false,
             fishIsCreating: false,
-            flyIsUpdating: false,
-            flyIsDeleting: false,
+            emailIsSending: false,
 
         } 
     },
@@ -106,6 +108,13 @@ export default {
 
             };
             this.createFishDialog = false;
+        },
+        openEmailDialog() {
+            this.email = '';
+            this.emailDialog = true;
+        },
+        closeEmailDialog() {
+            this.emailDialog = false;
         },
         closeEditDialog() {
             this.editFishDialog = false;
@@ -166,6 +175,21 @@ export default {
                     this.fishIsUpdating = false;
                 })
 
+        },
+
+        sendEmail() {
+            console.log(this.email);
+            this.emailIsSending = true;
+            this.emailErrorMessage = null;
+            this.$store.dispatch("fishes/sendEmail", this.email)
+                .then(() => {
+                    this.closeEmailDialog();
+                    this.emailIsSending = false;
+                })
+                .catch((error) => {
+                    this.emailErrorMessage = error.response.data.results;
+                    this.emailIsSending = false;
+                })
         },
 
         deleteFish() {

@@ -1,14 +1,19 @@
 <template>
-  <h1>This page is for logging the fish they catch of each species along with what rod and fly they used to catch them.</h1>
-  <br><br>
+    <v-row>
+        <h1>This page is for logging the fish they catch of each species along with what rod and fly they used to catch them.</h1>
+        <br><br>
+    </v-row>    
 
-  <h4>-Notes: <br>When editing the flies, you must clear the field values before changing them.<br>
-             Must reload the page after creating a new entity before it appears.</h4>
-  <br><br>
-
+    <v-row>
+        <h4>-Notes: <br>When editing the flies, you must clear the field values before changing them.<br>
+                    Must reload the page after creating a new entity before it appears.</h4>
+    </v-row>
   <v-row>
-        <v-col cols="12">
+        <v-col cols="6">
             <v-btn block color="green" @click="openCreateDialog" prepend-icon="mdi-plus">Create</v-btn>
+        </v-col>
+        <v-col cols="6">
+            <v-btn block color="blue" @click="openEmailDialog" prepend-icon="mdi-vuetify" >Email Data</v-btn>
         </v-col>
     </v-row>
 
@@ -163,6 +168,39 @@
                 <v-btn color="blue-darken-1" variant="text" @click="updateFish()" :loading="fishIsUpdating"
                     :disabled="fishIsUpdating">
                     Save
+                </v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="emailDialog" width="1024">
+        <v-card>
+            <v-card-title>
+                <span class="text-h5">Email data</span>
+            </v-card-title>
+            <v-card-text>
+                <v-container> 
+                    <v-row>
+                        <v-col cols="12">
+                            <v-card-subtitle>Enter the email you would like the data sent to:</v-card-subtitle>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col cols="12">
+                            <v-text-field v-model="email" label="Email" required></v-text-field>
+                        </v-col>
+                    </v-row>
+                </v-container>
+                <v-alert v-if="newFishErrorMessage" type="error">{{ newFishErrorMessage }}</v-alert>
+            </v-card-text>
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue-darken-1" :disabled="newFishErrorMessage" variant="text" @click="closeEmailDialog()">
+                    Close
+                </v-btn>
+                <v-btn color="green" variant="text" v-model="email" @click="sendEmail()" :loading="emailIsSending"
+                    :disabled="fishIsCreating">
+                    Send
                 </v-btn>
             </v-card-actions>
         </v-card>

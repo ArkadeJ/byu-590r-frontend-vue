@@ -64,7 +64,10 @@ export const fishes = {
                     return Promise.resolve(response.data);
                 }
             );
-        }
+        },
+        sendEmail({ commit }, email) {
+            return fishesService.sendEmail(email);
+        },
     },
     mutations: {
         setFishes(state, fishes) {

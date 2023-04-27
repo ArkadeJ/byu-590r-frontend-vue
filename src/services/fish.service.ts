@@ -59,8 +59,17 @@ class FishesService {
         return axios.post(API_URL + 'fishes/' + fish.id + '/update_fish_picture', formData, { headers: authHeader() })
             .then(response => {
                 return response.data.results;
-            })
+            });
     }
+
+    sendEmail(email) {
+        let formData = new FormData();
+        formData.append('email', email);
+        return (axios.post(API_URL + 'email', formData, { headers: authHeader() }))
+            .then(response => {
+                return response.data.results;
+            });
+    } 
 
 }
 
