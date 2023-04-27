@@ -7,9 +7,15 @@ export default {
         ...mapState({
             fishes() {
                 return this.$store.state.fishes.fishesList;
-            }
+            },
+            rods() {
+                return this.$store.state.fishes.rodsList;
+            },
+            flies() {
+                return this.$store.state.fishes.fliesList;
+            },
         })
-    },
+    }, 
     setup() {
         // Destructure only the keys we want to use
         const { xs, mdAndUp } = useDisplay()
@@ -26,16 +32,20 @@ export default {
                 species: '',
                 location: '', 
                 file: '',
+                rod_id: 0,
+                flies: [],
             },
 
             //Messages
             editFishErrorMessage: null,
             newFishErrorMessage: null,
+            editFlyErrorMessage: null,
 
             //Dialogs
             createFishDialog: false,
             deleteFishDialog: false,
             editFishDialog: false,
+            editFlyDialog: false,
 
             //Toggle Buttons
             editFileChangeDialogBtn: false,
@@ -44,16 +54,25 @@ export default {
             fishIsUpdating: false,
             fishIsDeleting: false,
             fishIsCreating: false,
-
+            flyIsUpdating: false,
+            flyIsDeleting: false,
 
         } 
     },
     created() {
         this.getFishes();
+        this.getRods();
+        this.getFlies();
     },
     methods: {
         getFishes() {
             this.$store.dispatch("fishes/getFishes")
+        },
+        getRods() {
+            this.$store.dispatch("fishes/getRods")
+        },
+        getFlies() {
+            this.$store.dispatch("fishes/getFlies")
         },
         openDeleteFishDialog(fish) {
             this.selectedDeleteFish = fish;
@@ -63,12 +82,17 @@ export default {
             this.editFish = fish;
             this.editFishDialog = true;
         },
+        openEditFlyDialog(fish) {
+            this.editFish = fish;
+            this.editFlyDialog = true
+        },
         openCreateDialog() {
             this.newFish = {
                 species: '',
                 location: '',
-                file: ''
-
+                file: '',
+                rod_id: 0,
+                flies: [],
             };
             this.createFishDialog = true;
         },
@@ -77,6 +101,8 @@ export default {
                 species: '',
                 location: '',
                 file: '',
+                rod_id: 0,
+                flies: [],
 
             };
             this.createFishDialog = false;
@@ -125,10 +151,9 @@ export default {
                 return;
 
             this.newFish.file = image[0];
-        },
+        }, 
 
         updateFish() {
-            console.log('view.ts updateFish()')
             this.fishIsUpdating = true;
             this.editFishErrorMessage = null;
             this.$store.dispatch("fishes/updateFish", this.editFish)

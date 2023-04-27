@@ -9,12 +9,30 @@ class FishesService {
                 return response.data.results;
             })
     }
+
+    getRods() {
+        return axios.get(API_URL + 'rods', { headers: authHeader() })
+            .then(response => {
+                return response.data.results;
+            })
+    }
+
+    getFlies() {
+        return axios.get(API_URL + 'flies', { headers: authHeader() })
+            .then(response => {
+                return response.data.results;
+            })
+    }
+
+
  
     createFish(fish) {
         let formData = new FormData();
         formData.append('file', fish.file);
         formData.append('species', fish.species);
         formData.append('location', fish.location);
+        formData.append('rod_id', fish.rod_id);
+        formData.append('flies[]', fish.flies);
         return axios.post(API_URL + 'fishes', formData, { headers: authHeader('multipart') })
             .then(response => {
                 return response.data.results;

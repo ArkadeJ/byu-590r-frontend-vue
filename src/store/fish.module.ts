@@ -1,6 +1,6 @@
 import fishesService from "../services/fish.service";
 
-const initialState = { fishesList: [] };
+const initialState = { fishesList: [], rodsList: [], fliesList: [] };
 
 export const fishes = {
     namespaced: true, 
@@ -11,6 +11,22 @@ export const fishes = {
                 fishes => {
                     commit('setFishes', fishes);
                     return Promise.resolve(fishes);
+                } 
+            );
+        },
+        getRods({ commit }) {
+            return fishesService.getRods().then(
+                rods => {
+                    commit('setRods', rods);
+                    return Promise.resolve(rods);
+                } 
+            );
+        },
+        getFlies({ commit }) {
+            return fishesService.getFlies().then(
+                flies => {
+                    commit('setFlies', flies);
+                    return Promise.resolve(flies);
                 } 
             );
         },
@@ -52,8 +68,25 @@ export const fishes = {
     },
     mutations: {
         setFishes(state, fishes) {
+            console.log(fishes);
             state.fishesList = fishes.map((fish) => {
                 return fish;
+            });
+        },
+        setRods(state, rods){
+            state.rodsList = rods.map((rod) => {
+                return {
+                    value:rod.id,
+                    title:rod.weight,
+                };
+            });
+        },
+        setFlies(state, flies){
+            state.fliesList = flies.map((fly) => {
+                return {
+                    value:fly.id,
+                    title:fly.type,
+                };
             });
         },
         addFish(state, fish) {

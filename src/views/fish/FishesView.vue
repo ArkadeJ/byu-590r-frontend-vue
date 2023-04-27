@@ -1,5 +1,5 @@
 <template>
-  <h1>This page is for logging the largest fish they catch of each species along with what rod and fly they used to catch them.</h1>
+  <h1>This page is for logging the fish they catch of each species along with what rod and fly they used to catch them.</h1>
   <br><br>
   <v-row>
         <v-col cols="12">
@@ -33,8 +33,23 @@
                         <v-img :class="{ 'pa-4 text-center rounded-0': true, }"
                             width="300" height="400" :src="fish.file"></v-img>
                     </v-card-item>
-            
 
+                    <v-card-text>
+                        <v-row>
+                            <v-col >
+                                <v-card-subtitle>
+                                    Rod weight: {{ fish?.rod?.weight }}
+                                </v-card-subtitle> 
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col>
+                                <v-card-subtitle v-for="fly in fish.flies">
+                                    {{ fly.type }}
+                                </v-card-subtitle>
+                            </v-col>   
+                        </v-row>
+                    </v-card-text>
                 </v-card-item>
             </v-card>
         </v-col>
@@ -67,6 +82,12 @@
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
                             <v-text-field v-model="newFish.location" label="Fish Location" required></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="4">
+                            <v-select label="Select" :items="rods" v-model="newFish.rod_id"></v-select>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="4">
+                            <v-select multiple chips clearable label="Select" :items="flies" v-model="newFish.flies"></v-select>
                         </v-col>
                     </v-row>
                     <v-row>
@@ -105,8 +126,14 @@
                         <v-col cols="12" sm="6" md="4">
                             <v-text-field v-model="editFish.location" label="Fish location*" required></v-text-field>
                         </v-col>
+                        <v-col cols="12" sm="6" md="4">
+                            <v-select label="Select" :items="rods" v-model="editFish.rod_id"></v-select>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="4">
+                            <v-select multiple chips clearable label="Select" :items="flies" v-model="editFish.flies"></v-select>
+                        </v-col>
                     </v-row>
-                    <v-row>
+                    <v-row> 
                         <v-col cols="12">
                             <div v-if="editFileChangeDialogBtn">
                                 <v-file-input accept="image/*" @change="onExistingFishPictureChange"
@@ -135,6 +162,7 @@
             </v-card-actions>
         </v-card>
     </v-dialog>
+
 </template>
 
 <script src="./FishesView.ts"></script>

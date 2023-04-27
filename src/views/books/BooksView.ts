@@ -3,7 +3,7 @@ import { useDisplay } from 'vuetify/lib/framework.mjs';
 
 export default {
     name: 'BooksView',
-    computed: {
+    computed: { 
         ...mapState({
             books() {
                 return this.$store.state.books.booksList;
